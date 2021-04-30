@@ -1,7 +1,14 @@
 {
-  "name": "$name$",
-  "version": "$version$",
-  "dependencies": {
-    $END$
-  }
+"recipes": [
+    {
+      "id": 1,
+      "title": "omlet",
+      "ing": "egg"
+    },
+    {
+      "id": 2,
+      "title": "tea",
+      "ing": "teabag"
+    }
+  ]
 }
