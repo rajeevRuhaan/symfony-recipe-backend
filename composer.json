@@ -20,7 +20,7 @@
         "symfony/proxy-manager-bridge": "5.2.*",
         "symfony/yaml": "5.2.*"
     },
-    "require-dev": {
+    "require": {
         "symfony/maker-bundle": "^1.30"
     },
     "config": {
