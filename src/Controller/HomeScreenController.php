@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Recipe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeScreenController extends AbstractController
@@ -14,27 +15,26 @@ class HomeScreenController extends AbstractController
 
 
     /**
-     * @Route("/newrecipe/add", name="add_new_recipe")
+     * @Route("/newrecipe/add", name="add_new_recipe", methods={"POST"})
      */
-    public function addRecipe(){
+    public function addRecipe(Request $request){
         $entityManager = $this->getDoctrine()->getManager();
+        $data = json_decode($request->getContent(), true);
 
         $newRecipe = new Recipe();
-        $newRecipe->setName('Omlet');
-        $newRecipe->setIngredients('Omlet, oil');
-        $newRecipe->setDifficulty('easy');
-
-        $newRecipe1 = new Recipe();
-        $newRecipe1->setName('coffee');
-        $newRecipe1->setIngredients('coffee, milk, sugar');
-        $newRecipe1->setDifficulty('very easy');
-
+        $newRecipe->setName($data['name']);
+        $newRecipe->setDescription($data['description']);
+        $newRecipe->setRecipeIngredient($data["recipeIngredient"]);
+       // $newRecipe->setRecipeIngredient(["test", "test2"]);
+        $newRecipe->setImage($data["image"]);
+       $newRecipe->setDirection($data["direction"]);
+        //$newRecipe->setDirection(["step1", "step2"]);
 
         $entityManager->persist($newRecipe);
-        $entityManager->persist($newRecipe1);
+
         $entityManager->flush();
 
-    return new Response('try to add ....' . $newRecipe1->getId() . " " . $newRecipe->getId());
+    return new Response('try to add ....'  . $newRecipe->getId());
     }
 
     /**
@@ -69,8 +69,10 @@ class HomeScreenController extends AbstractController
             return $this->json([
                 'id'=> $recipe->getId(),
                 'name'=> $recipe->getName(),
-                'ingredients'=> $recipe->getIngredients(),
-                'difficulty' => $recipe->getDifficulty()
+                'description' => $recipe->getDescription(),
+                'ingredients'=> $recipe->getRecipeIngredient(),
+                'image' =>$recipe->getImage(),
+                'direction' => $recipe->getDirection()
             ]);
         }
 

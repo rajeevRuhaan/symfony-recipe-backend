@@ -25,51 +25,119 @@ class Recipe
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $ingredients;
+    private $description;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="array")
      */
-    private $difficulty;
+    private $recipeIngredient = [];
 
-    public function getId(): ?int
+    /**
+     * @ORM\Column (type="string", length=200)
+     */
+    private $image;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $direction = [];
+
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
     {
         $this->name = $name;
-
-        return $this;
     }
 
-    public function getIngredients(): ?string
+    /**
+     * @return mixed
+     */
+    public function getDescription()
     {
-        return $this->ingredients;
+        return $this->description;
     }
 
-    public function setIngredients(string $ingredients): self
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
     {
-        $this->ingredients = $ingredients;
-
-        return $this;
+        $this->description = $description;
     }
 
-    public function getDifficulty(): ?string
+    /**
+     * @return array
+     */
+    public function getRecipeIngredient(): array
     {
-        return $this->difficulty;
+        return $this->recipeIngredient;
     }
 
-    public function setDifficulty(string $difficulty): self
+    /**
+     * @param array $recipeIngredient
+     */
+    public function setRecipeIngredient(array $recipeIngredient): void
     {
-        $this->difficulty = $difficulty;
+        $this->recipeIngredient = $recipeIngredient;
+    }
 
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image): void
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDirection(): array
+    {
+        return $this->direction;
+    }
+
+    /**
+     * @param array $direction
+     */
+    public function setDirection(array $direction): void
+    {
+        $this->direction = $direction;
     }
 }
+
+
+
