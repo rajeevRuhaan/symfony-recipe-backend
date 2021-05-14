@@ -25,10 +25,10 @@ class HomeScreenController extends AbstractController
         $newRecipe->setName($data['name']);
         $newRecipe->setDescription($data['description']);
         $newRecipe->setRecipeIngredient($data["recipeIngredient"]);
-       // $newRecipe->setRecipeIngredient(["test", "test2"]);
+
         $newRecipe->setImage($data["image"]);
        $newRecipe->setDirection($data["direction"]);
-        //$newRecipe->setDirection(["step1", "step2"]);
+
 
         $entityManager->persist($newRecipe);
 
@@ -38,7 +38,7 @@ class HomeScreenController extends AbstractController
     }
 
     /**
-     * @Route("/newrecipe/all", name="get_all_recipe")
+     * @Route("/newrecipe/all", name="get_all_recipe" )
      */
     public function getAllRecipe() {
         $recipes = $this->getDoctrine()->getRepository(Recipe::class)->findAll();
@@ -47,8 +47,8 @@ class HomeScreenController extends AbstractController
         foreach ($recipes as $recipe) {
             $response[] = array (
                 'name' => $recipe->getName(),
-                'ingredients' => $recipe->getIngredients(),
-                'difficulty' => $recipe->getDifficulty()
+                'ingredients' => $recipe->getRecipeIngredient(),
+                'difficulty' => $recipe->getDirection()
 
             );
         }
